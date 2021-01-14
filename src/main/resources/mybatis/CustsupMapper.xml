@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luqiao.interf.mapper.CustsupMapper">
+
+    <resultMap id="BaseResultMap" type="com.luqiao.interf.entity.Custsup">
+        <id column="CUSTSUP_ID" property="custsupId" />
+        <result column="CUSTSUP_CODE" property="custsupCode" />
+        <result column="CUSTSUP_NAME" property="custsupName" />
+        <result column="CUSTSUP_PK_CUST_SUP" property="custsupPkCustSup" />
+        <result column="CUSTSUP_CUSTSUPTYPE" property="custsupCustsuptype" />
+        <result column="CUSTSUP_TS" property="custsupTs" />
+    </resultMap>
+    <select id="getCustsupList" resultMap="BaseResultMap">
+        select * from YY_CUSTSUP
+    </select>
+</mapper>
