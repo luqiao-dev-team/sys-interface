@@ -19,6 +19,7 @@ class SysInterfaceApplicationTests {
 		System.out.println("Mybatis plus test......");
 		List<Custsup> custsupList = custsupMapper.getCustsupList();
 		custsupList.forEach(System.out::println);
+		System.out.println("Mybatis plus test finish");
 	}
 
 }
