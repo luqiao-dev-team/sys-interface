@@ -4,13 +4,24 @@
 
     <resultMap id="BaseResultMap" type="com.luqiao.interf.entity.Custsup">
         <id column="CUSTSUP_ID" property="custsupId" />
-        <result column="CUSTSUP_CODE" property="custsupCode" />
-        <result column="CUSTSUP_NAME" property="custsupName" />
-        <result column="CUSTSUP_PK_CUST_SUP" property="custsupPkCustSup" />
-        <result column="CUSTSUP_CUSTSUPTYPE" property="custsupCustsuptype" />
-        <result column="CUSTSUP_TS" property="custsupTs" />
+        <result column="CUSTSUP_CODE" property="code" />
+        <result column="CUSTSUP_NAME" property="name" />
+        <result column="CUSTSUP_PK_CUST_SUP" property="pk_cust_sup" />
+        <result column="CUSTSUP_CUSTSUPTYPE" property="custsuptype" />
+        <result column="CUSTSUP_TS" property="ts" />
     </resultMap>
     <select id="getCustsupList" resultMap="BaseResultMap">
         select * from YY_CUSTSUP
     </select>
+
+    <update id="mergeinfo">
+        MERGE INTO YY_CUSTSUP t1
+            USING  (select count(*) c from YY_CUSTSUP t2 where t2.custsup_pk_cust_sup=#{pk_cust_sup,jdbcType=VARCHAR})x
+            ON (x.c > 0)
+            when matched then
+                update set t1.custsup_code = #{code,jdbcType=VARCHAR}, t1.custsup_name = #{name,jdbcType=VARCHAR}, t1.custsup_custsuptype = #{custsuptype,jdbcType=VARCHAR},t1.custsup_ts = #{ts,jdbcType=VARCHAR}
+            where t1.custsup_pk_cust_sup=#{pk_cust_sup,jdbcType=VARCHAR}
+            when not matched then
+            insert values(sys_guid(),#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{pk_cust_sup,jdbcType=VARCHAR},#{custsuptype,jdbcType=VARCHAR},#{ts,jdbcType=VARCHAR})
+    </update>
 </mapper>

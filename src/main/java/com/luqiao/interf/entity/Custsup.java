@@ -11,7 +11,7 @@ import java.io.Serializable;
  * <p>
  * 
  * </p>
- *
+ * 客商信息
  * @author zhouguoan
  * @since 2021-01-12
  */
@@ -30,27 +30,27 @@ public class Custsup implements Serializable {
      * 用户编码
      */
     @TableField("CUSTSUP_CODE")
-    private String custsupCode;
+    private String code;
     /**
      * 用户名称
      */
     @TableField("CUSTSUP_NAME")
-    private String custsupName;
+    private String name;
     /**
      * 主键
      */
     @TableField("CUSTSUP_PK_CUST_SUP")
-    private String custsupPkCustSup;
+    private String pk_cust_sup;
     /**
      * 客商类别
      */
     @TableField("CUSTSUP_CUSTSUPTYPE")
-    private Long custsupCustsuptype;
+    private Long custsuptype;
     /**
      * 时间戳
      */
     @TableField("CUSTSUP_TS")
-    private String custsupTs;
+    private String ts;
 
 
     public String getCustsupId() {
@@ -61,55 +61,43 @@ public class Custsup implements Serializable {
         this.custsupId = custsupId;
     }
 
-    public String getCustsupCode() {
-        return custsupCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setCustsupCode(String custsupCode) {
-        this.custsupCode = custsupCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getCustsupName() {
-        return custsupName;
+    public String getName() {
+        return name;
     }
 
-    public void setCustsupName(String custsupName) {
-        this.custsupName = custsupName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCustsupPkCustSup() {
-        return custsupPkCustSup;
+    public String getPk_cust_sup() {
+        return pk_cust_sup;
     }
 
-    public void setCustsupPkCustSup(String custsupPkCustSup) {
-        this.custsupPkCustSup = custsupPkCustSup;
+    public void setPk_cust_sup(String pk_cust_sup) {
+        this.pk_cust_sup = pk_cust_sup;
     }
 
-    public Long getCustsupCustsuptype() {
-        return custsupCustsuptype;
+    public Long getCustsuptype() {
+        return custsuptype;
     }
 
-    public void setCustsupCustsuptype(Long custsupCustsuptype) {
-        this.custsupCustsuptype = custsupCustsuptype;
+    public void setCustsuptype(Long custsuptype) {
+        this.custsuptype = custsuptype;
     }
 
-    public String getCustsupTs() {
-        return custsupTs;
+    public String getTs() {
+        return ts;
     }
 
-    public void setCustsupTs(String custsupTs) {
-        this.custsupTs = custsupTs;
-    }
-
-    @Override
-    public String toString() {
-        return "Custsup{" +
-        ", custsupId=" + custsupId +
-        ", custsupCode=" + custsupCode +
-        ", custsupName=" + custsupName +
-        ", custsupPkCustSup=" + custsupPkCustSup +
-        ", custsupCustsuptype=" + custsupCustsuptype +
-        ", custsupTs=" + custsupTs +
-        "}";
+    public void setTs(String ts) {
+        this.ts = ts;
     }
 }

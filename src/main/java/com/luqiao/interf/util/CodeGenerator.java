@@ -32,7 +32,7 @@ public class CodeGenerator {
         // XML columList
         gc.setBaseColumnList( false );
         // 作者
-        gc.setAuthor( "zhouguoan" );
+        gc.setAuthor( "guotao" );
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         gc.setControllerName( "%sController" );

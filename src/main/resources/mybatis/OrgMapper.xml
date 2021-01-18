@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luqiao.interf.mapper.OrgMapper">
+
+    <resultMap id="BaseResultMap" type="com.luqiao.interf.entity.Org">
+        <id column="ORG_ID" property="orgId" />
+        <result column="ORG_CODE" property="code" />
+        <result column="ORG_NAME" property="name" />
+        <result column="ORG_PK_ORG" property="pk_org" />
+        <result column="ORG_PK_FATHERORG" property="pk_fatherorg" />
+        <result column="ORG_TS" property="ts" />
+    </resultMap>
+    <select id="getOrgList" resultMap="BaseResultMap">
+        select * from YY_ORG
+    </select>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        select * from YY_ORG t
+        where t.ORG_PK_ORG = #{orgPkOrg, jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insert">
+        insert into YY_ORG (ORG_ID, ORG_CODE, ORG_NAME, ORG_PK_ORG, ORG_PK_FATHERORG, ORG_TS, ORG_FCODE)
+        values (#{orgId,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR},
+                #{orgPkOrg,jdbcType=VARCHAR}, #{orgPkFatherorg,jdbcType=VARCHAR}, #{orgTs,jdbcType=VARCHAR},
+                #{orgFcode,jdbcType=VARCHAR}
+               )
+    </insert>
+
+    <update id="mergeinfo">
+        MERGE INTO YY_ORG t1
+            USING  (select count(*) c from YY_ORG t2 where t2.ORG_PK_ORG=#{pk_org,jdbcType=VARCHAR})x
+            ON (x.c > 0)
+            when matched then
+                update set t1.ORG_CODE = #{code,jdbcType=VARCHAR}, t1.ORG_NAME = #{name,jdbcType=VARCHAR}, t1.ORG_PK_FATHERORG = #{pk_fatherorg,jdbcType=VARCHAR},t1.ORG_FCODE = #{fcode,jdbcType=VARCHAR},t1.ORG_TS = #{ts,jdbcType=VARCHAR}
+            where t1.ORG_PK_ORG=#{pk_org,jdbcType=VARCHAR}
+            when not matched then
+            insert (ORG_ID,ORG_CODE,ORG_NAME,ORG_PK_ORG,ORG_PK_FATHERORG,ORG_TS)
+            values(sys_guid(),#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{pk_org,jdbcType=VARCHAR},#{pk_fatherorg,jdbcType=VARCHAR},#{ts,jdbcType=VARCHAR})
+    </update>
+
+</mapper>

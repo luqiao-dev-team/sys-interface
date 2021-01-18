@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luqiao.interf.mapper.ProjectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.luqiao.interf.entity.Project">
+        <id column="PROJECT_ID" property="projectId" />
+        <result column="PROJECT_CODE" property="code" />
+        <result column="PROJECT_NAME" property="name" />
+        <result column="PROJECT_PK_ORG" property="pk_org" />
+        <result column="PROJECT_ORGCODE" property="orgcode" />
+        <result column="PROJECT_PK_PROJECT" property="pk_project" />
+        <result column="PROJECT_TS" property="ts" />
+    </resultMap>
+
+    <update id="mergeinfo">
+        MERGE INTO YY_PROJECT t1
+            USING  (select count(*) c from YY_PROJECT t2 where t2.PROJECT_PK_PROJECT=#{pk_project,jdbcType=VARCHAR})x
+            ON (x.c > 0)
+            when matched then
+                update set t1.PROJECT_CODE = #{code,jdbcType=VARCHAR}, t1.PROJECT_NAME = #{name,jdbcType=VARCHAR}, t1.PROJECT_PK_ORG = #{pk_org,jdbcType=VARCHAR},t1.PROJECT_ORGCODE = #{orgcode,jdbcType=VARCHAR},t1.PROJECT_TS = #{ts,jdbcType=VARCHAR}
+            where t1.PROJECT_PK_PROJECT=#{pk_project,jdbcType=VARCHAR}
+            when not matched then
+            insert (PROJECT_ID,PROJECT_CODE,PROJECT_NAME,PROJECT_PK_ORG,PROJECT_ORGCODE,PROJECT_PK_PROJECT,PROJECT_TS)
+            values(sys_guid(),#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{pk_org,jdbcType=VARCHAR},#{orgcode,jdbcType=VARCHAR},#{pk_project,jdbcType=VARCHAR},#{ts,jdbcType=VARCHAR})
+    </update>
+</mapper>
