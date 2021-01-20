@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luqiao.interf.mapper.PmContractMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.luqiao.interf.entity.PmContract">
+        <result column="PM_ID" property="pmId" />
+        <result column="CTNAME" property="ctname" />
+        <result column="VBILLCODE" property="vbillcode" />
+        <result column="CUSTOMER" property="customer" />
+        <result column="NTAXRATE" property="ntaxrate" />
+        <result column="JSFS" property="jsfs" />
+        <result column="DBILLDATE" property="dbilldate" />
+        <result column="INITIALMNY" property="initialmny" />
+        <result column="NTOTALTAXMNY" property="ntotaltaxmny" />
+        <result column="NORIGMNY" property="norigmny" />
+        <result column="TS" property="ts" />
+        <result column="PK_ORG" property="pkOrg" />
+        <result column="CTRANTYPEID" property="ctrantypeid" />
+        <result column="QCYSMNY" property="qcysmny" />
+        <result column="QCJSMNY" property="qcjsmny" />
+        <result column="QCSKMNY" property="qcskmny" />
+        <result column="PROJECT" property="project" />
+        <result column="YJSMNY" property="yjsmny" />
+        <result column="PLANMONEY" property="planmoney" />
+        <result column="PK_PSNDOC" property="pkPsndoc" />
+        <result column="HTDJ_SZFX" property="htdjSzfx" />
+    </resultMap>
+
+    <select id="getContractListByCondition" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        <![CDATA[select pm_id as "pm_id",
+       ctname as "ctname",
+       vbillcode as "vbillcode",
+       '029900039110408' as "pk_customer",
+       nvl(ntaxrate,0) as "ntaxrate" ,
+       nvl(jsfs,'测试方式') as "jsfs",
+       to_char(dbilldate, 'yyyy-mm-dd hh24:mi:ss') as "dbilldate",
+       initialmny as "initialmny",
+       ntotaltaxmny as "ntotaltaxmny",
+       norigmny as "norigmny",
+       to_char(nvl(ts,sysdate), 'yyyy-mm-dd hh24:mi:ss') as "ts",
+       nvl(pk_org,'07000000P') as "pk_org",
+       ctrantypeid as "ctrantypeid",
+       planmoney as "planmoney",
+       qcysmny as "qcysmny",
+       qcjsmny as "qcjsmny",
+       qcskmny as "qcskmny",
+       nvl(project,'测试项目') as "project",
+       '37078419841106585X' as "pk_psndoc",
+       nvl(yjsmny,0) as "yjsmny" from v_pm_contract where HTDJ_SZFX = ${szfx}
+        ]]>
+    </select>
+
+</mapper>

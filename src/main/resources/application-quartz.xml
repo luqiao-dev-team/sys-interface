@@ -4,13 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- 配置Job类 -->
-    <bean id="SampleTask" class="com.luqiao.interf.job.SampleTask"></bean>
+    <bean id="ContractTask" class="com.luqiao.interf.job.ContractTask"></bean>
     <!-- 配置JobDetail -->
     <bean id="springQtzJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <!-- 执行目标job -->
-        <property name="targetObject" ref="SampleTask"></property>
+        <property name="targetObject" ref="ContractTask"></property>
         <!-- 要执行的方法 -->
-        <property name="targetMethod" value="execute"></property>
+        <property name="targetMethod" value="execute4SkContract"></property>
         <property name="concurrent" value="false"></property><!--配置为false不允许任务并发执行-->
     </bean>
     <!-- 配置tirgger触发器 -->
