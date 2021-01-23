@@ -17,4 +17,6 @@ public class ConstantURL {
     public static final String INOUTBUSICLASS = DOMAIN+ "/service/inoutbusiclass/query";
     //用友核算项目查询接口
     public static final String PROJECTPOST = DOMAIN+ "/service/project/query";
+    //用友核算项目查询接口
+    public static final String CUSTSUPSAVE = DOMAIN+ "/service/custsup/save";
 }

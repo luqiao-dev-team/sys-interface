@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,4 +33,10 @@ public interface CustsupMapper extends BaseMapper<Custsup> {
 
     @Override
     Integer deleteById(Serializable serializable);
+
+    Integer mergeinfo(Custsup org);
+
+    List<Map<String,String>> getgyshList();
+
+    List<Map<String,String>> getfbshList();
 }

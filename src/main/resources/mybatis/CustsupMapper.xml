@@ -10,6 +10,16 @@
         <result column="CUSTSUP_CUSTSUPTYPE" property="custsuptype" />
         <result column="CUSTSUP_TS" property="ts" />
     </resultMap>
+
+    <resultMap id="GyshResultMap" type="com.luqiao.interf.entity.PmmdGysh">
+        <id column="GYSH_DWBH" property="custsupId" />
+        <result column="GYSH_TIME" property="code" />
+        <result column="GYSH_BH" property="name" />
+        <result column="GYSH_DWLB" property="pk_cust_sup" />
+        <result column="GYSH_MC" property="custsuptype" />
+        <result column="GYSH_SH" property="ts" />
+    </resultMap>
+
     <select id="getCustsupList" resultMap="BaseResultMap">
         select * from YY_CUSTSUP
     </select>
@@ -24,4 +34,21 @@
             when not matched then
             insert values(sys_guid(),#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{pk_cust_sup,jdbcType=VARCHAR},#{custsuptype,jdbcType=VARCHAR},#{ts,jdbcType=VARCHAR})
     </update>
+
+    <select id="getgyshList" resultType="java.util.HashMap">
+        select to_char(t1.GYSH_TIME,'yyyy-mm-dd hh24:mi:ss') as GYSH_TIME,t1.GYSH_SFNBDW,t1.GYSH_MC,t1.GYSH_SH,t2.EXTVALUE,t3.YYDWID
+        from pmmdgysh t1
+                 left join GSPUserExtensions t2 on t1.GYSH_TBRID = t2.USERID
+                 left join YYGSHSDW t3 on t1.GYSH_ID = t3.GSDWID
+        where t1.GYSH_TIME between (sysdate-30/60/24) and sysdate
+    </select>
+
+    <select id="getfbshList" resultType="java.util.HashMap">
+        select to_char(t1.FBSH_TIME,'yyyy-mm-dd hh24:mi:ss') as FBSH_TIME,t1.FBSH_SFNBDW,t1.FBSH_MC,t1.FBSH_SH,t2.EXTVALUE,t3.YYDWID
+        from pmmdfbsh t1
+                 left join GSPUserExtensions t2 on t1.FBSH_TBRID = t2.USERID
+                 left join YYGSHSDW t3 on t1.FBSH_ID = t3.GSDWID
+        where t1.FBSH_TIME between (sysdate-30/60/24) and sysdate
+    </select>
+
 </mapper>

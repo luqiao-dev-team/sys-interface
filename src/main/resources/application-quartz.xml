@@ -5,15 +5,18 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- 配置Job类 -->
     <bean id="SampleTask" class="com.luqiao.interf.job.SampleTask"></bean>
+
+    <!-- 业务单元(组织)查询定时任务 -->
     <!-- 配置JobDetail -->
     <bean id="springQtzJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <!-- 执行目标job -->
         <property name="targetObject" ref="SampleTask"></property>
-        <!-- 要执行的方法 -->
-        <property name="targetMethod" value="execute"></property>
-        <property name="concurrent" value="false"></property><!--配置为false不允许任务并发执行-->
+        <!-- 要执行的方法  业务单元(组织)查询定时任务-->
+        <property name="targetMethod" value="orgTask"></property>
+
+        <property name="concurrent" value="true"></property><!--配置为false不允许任务并发执行-->
     </bean>
-    <!-- 配置tirgger触发器 -->
+    <!-- 配置tirgger触发器  业务单元(组织)查询定时任务-->
     <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <!-- jobDetail -->
         <property name="jobDetail" ref="springQtzJob"></property>
@@ -21,12 +24,153 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
         <!-- 可以根据自己的需求指定执行时间 -->
         <property name="cronExpression" value="0/10 * * * * ? "></property>
     </bean>
+
+
+
+    <!-- 部门查询定时任务 -->
+    <!-- 配置JobDetail -->
+    <bean id="springQtzJob2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行目标job -->
+        <property name="targetObject" ref="SampleTask"></property>
+        <!-- 要执行的方法  部门查询定时任务-->
+        <property name="targetMethod" value="deptTask"></property>
+
+        <property name="concurrent" value="true"></property><!--配置为false不允许任务并发执行-->
+    </bean>
+
+    <!-- 配置tirgger触发器  部门查询定时任务-->
+    <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- jobDetail -->
+        <property name="jobDetail" ref="springQtzJob2"></property>
+        <!-- cron表达式，执行时间每10秒执行一次 -->
+        <!-- 可以根据自己的需求指定执行时间 -->
+        <property name="cronExpression" value="0/10 * * * * ? "></property>
+    </bean>
+
+
+    <!-- 人员查询定时任务 -->
+    <!-- 配置JobDetail -->
+    <bean id="springQtzJob3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行目标job -->
+        <property name="targetObject" ref="SampleTask"></property>
+        <!-- 要执行的方法  人员查询定时任务-->
+        <property name="targetMethod" value="psndocTask"></property>
+
+        <property name="concurrent" value="true"></property><!--配置为false不允许任务并发执行-->
+    </bean>
+
+    <!-- 配置tirgger触发器  人员查询定时任务-->
+    <bean id="cronTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- jobDetail -->
+        <property name="jobDetail" ref="springQtzJob3"></property>
+        <!-- cron表达式，执行时间每10秒执行一次 -->
+        <!-- 可以根据自己的需求指定执行时间 -->
+        <property name="cronExpression" value="0/10 * * * * ? "></property>
+    </bean>
+
+
+
+
+    <!-- 客商查询定时任务 -->
+    <!-- 配置JobDetail -->
+    <bean id="springQtzJob4" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行目标job -->
+        <property name="targetObject" ref="SampleTask"></property>
+        <!-- 要执行的方法  客商查询定时任务-->
+        <property name="targetMethod" value="custsupTask"></property>
+
+        <property name="concurrent" value="true"></property><!--配置为false不允许任务并发执行-->
+    </bean>
+
+    <!-- 配置tirgger触发器  客商查询定时任务-->
+    <bean id="cronTrigger4" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- jobDetail -->
+        <property name="jobDetail" ref="springQtzJob4"></property>
+        <!-- cron表达式，执行时间每10秒执行一次 -->
+        <!-- 可以根据自己的需求指定执行时间 -->
+        <property name="cronExpression" value="0/10 * * * * ? "></property>
+    </bean>
+
+
+
+
+    <!-- 收支项目查询定时任务 -->
+    <!-- 配置JobDetail -->
+    <bean id="springQtzJob5" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行目标job -->
+        <property name="targetObject" ref="SampleTask"></property>
+        <!-- 要执行的方法  收支项目查询定时任务-->
+        <property name="targetMethod" value="inoutbcTask"></property>
+
+        <property name="concurrent" value="true"></property><!--配置为false不允许任务并发执行-->
+    </bean>
+
+    <!-- 配置tirgger触发器  收支项目查询定时任务-->
+    <bean id="cronTrigger5" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- jobDetail -->
+        <property name="jobDetail" ref="springQtzJob5"></property>
+        <!-- cron表达式，执行时间每10秒执行一次 -->
+        <!-- 可以根据自己的需求指定执行时间 -->
+        <property name="cronExpression" value="0/10 * * * * ? "></property>
+    </bean>
+
+
+
+
+    <!-- 核算项目查询定时任务 -->
+    <!-- 配置JobDetail -->
+    <bean id="springQtzJob6" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行目标job -->
+        <property name="targetObject" ref="SampleTask"></property>
+        <!-- 要执行的方法  核算项目查询定时任务-->
+        <property name="targetMethod" value="projectTask"></property>
+
+        <property name="concurrent" value="true"></property><!--配置为false不允许任务并发执行-->
+    </bean>
+
+    <!-- 配置tirgger触发器  核算项目查询定时任务-->
+    <bean id="cronTrigger6" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- jobDetail -->
+        <property name="jobDetail" ref="springQtzJob6"></property>
+        <!-- cron表达式，执行时间每10秒执行一次 -->
+        <!-- 可以根据自己的需求指定执行时间 -->
+        <property name="cronExpression" value="0/10 * * * * ? "></property>
+    </bean>
+
+
+
+
+    <!-- 客商新增接口定时任务 -->
+    <!-- 配置JobDetail -->
+    <bean id="springQtzJob7" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 执行目标job -->
+        <property name="targetObject" ref="SampleTask"></property>
+        <!-- 要执行的方法  核算项目查询定时任务-->
+        <property name="targetMethod" value="custsupNewTask"></property>
+
+        <property name="concurrent" value="true"></property><!--配置为false不允许任务并发执行-->
+    </bean>
+
+    <!-- 配置tirgger触发器  客商新增接口定时任务-->
+    <bean id="cronTrigger7" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- jobDetail -->
+        <property name="jobDetail" ref="springQtzJob7"></property>
+        <!-- cron表达式，执行时间每10秒执行一次 -->
+        <!-- 可以根据自己的需求指定执行时间 -->
+        <property name="cronExpression" value="0/10 * * * * ? "></property>
+    </bean>
+
     <!-- 配置调度工厂 -->
     <bean id="springJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
                 <ref bean="cronTrigger1"></ref>
-                <!-- <ref bean="cronTrigger2"></ref>-->
+                <ref bean="cronTrigger2"></ref>
+                <ref bean="cronTrigger3"></ref>
+                <ref bean="cronTrigger4"></ref>
+                <ref bean="cronTrigger5"></ref>
+                <ref bean="cronTrigger6"></ref>
+                <ref bean="cronTrigger7"></ref>
             </list>
         </property>
 
