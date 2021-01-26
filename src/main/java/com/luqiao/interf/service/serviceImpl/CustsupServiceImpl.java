@@ -94,7 +94,7 @@ public class CustsupServiceImpl extends ServiceImpl<CustsupMapper, Custsup> impl
         requestInfo.setKey(key);
         String str = JSON.toJSONString(requestInfo);
         logger.info("客商新增接口请求参数："+str);
-        String result = MyHttpUtils.postBody(ConstantURL.CUSTSUPOST,str);
+        String result = MyHttpUtils.postBody(ConstantURL.CUSTSUPSAVE,str);
         return result;
     }
 
@@ -132,7 +132,7 @@ public class CustsupServiceImpl extends ServiceImpl<CustsupMapper, Custsup> impl
         requestInfo.setKey(key);
         String str = JSON.toJSONString(requestInfo);
         logger.info("客商新增接口请求参数："+str);
-        String result = MyHttpUtils.postBody(ConstantURL.CUSTSUPOST,str);
+        String result = MyHttpUtils.postBody(ConstantURL.CUSTSUPSAVE,str);
         return result;
     }
 }
